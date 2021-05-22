@@ -1,0 +1,11 @@
+{
+  "name": "webagc-demo",
+  "version": "1.0.0",
+  "description": "Demo for webAGC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Karl Franzl",
+  "license": "GPL-2.0-or-later"
+}

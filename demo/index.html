@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>webAGC</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="screen.css">
+
+    <script type="importmap">
+    </script>
+    <script type="module" src="index.js"></script>
+  </head>
+
+  <body>
+    <h1>webAGC Demo</h1>
+
+    <p>Explainer and source code is available at <a href="https://github.com/michaelfranzl/webAGC" target="_blank">https://github.com/michaelfranzl/webAGC</a></p>
+
+    <p>
+      <i>Requires a browser supporting <a href="https://caniuse.com/?search=importmap"
+          target="_blank">import maps</a> (e.g. based on Chromium 89 or newer).</i>
+    </p>
+
+    <div>
+      <label>Clock divisor:</label>
+      <select id="clock_divisor">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="4">4</option>
+        <option value="8">8</option>
+        <option value="16">16</option>
+        <option value="32">32</option>
+        <option value="64">64</option>
+        <option value="128">128</option>
+        <option value="256">256</option>
+        <option value="512">512</option>
+        <option value="1024">1024</option>
+        <option value="2048">2048</option>
+        <option value="4096">4096</option>
+        <option value="8192">8192</option>
+        <option value="32768">32768</option>
+        <option value="65536">65536</option>
+        <option value="inf">inf</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Clock speed:</label>
+      <span id="clock_speed"></span>
+    </div>
+
+    <div>
+      <label>CPU manipulation:</label>
+      <button id="button_reset">Reset</button>
+      <button id="button_halt">Halt</button>
+      <button id="button_step">Step</button>
+      <button id="button_run">Run</button>
+    </div>
+
+    <div>
+      <label>Load program:</label>
+      <select name="" id="programs">
+        <option></option>
+        <option value="Luminary099.bin">Luminary099.bin</option>
+        <option value="Validation.bin">Validation.bin</option>
+      </select>
+    </div>
+
+    <div id="dsky">
+      <label>DSKY key input:</label>
+      <input id="dsky_key_input"></input>
+    </div>
+
+    <div id="erasable">
+      <h2>Erasable memory</h2>
+      <p>8 banks of 256 16-bit words</p>
+    </div>
+  </body>
+</html>
