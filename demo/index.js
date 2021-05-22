@@ -2,7 +2,7 @@
 // SPDX-FileCopyrightText: Copyright 2020 Michael Karl Franzl <public.michael@franzl.name>
 
 import 'webdsky';
-import WebAGC from '../src/webAGC.js';
+import WebAGC from 'WebAGC';
 
 function buf2hex(buffer) { // buffer is an ArrayBuffer
   return [...new Uint8Array(buffer)].map(x => x.toString(16).padStart(2, '0')).join('');
