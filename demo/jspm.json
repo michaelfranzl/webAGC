@@ -2,7 +2,8 @@
   "resolve": {
     "@jspm/core": "npm:@jspm/core@1.1.1",
     "@wasmer/wasi": "npm:@wasmer/wasi@0.12.0",
-    "@wasmer/wasmfs": "npm:@wasmer/wasmfs@0.12.0"
+    "@wasmer/wasmfs": "npm:@wasmer/wasmfs@0.12.0",
+    "webdsky": "npm:webdsky@1.0.2"
   },
   "dependencies": {
     "npm:@jspm/core@1.1.1": {
@@ -131,6 +132,9 @@
     },
     "npm:util-deprecate@1.0.2": {
       "source": "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
+    },
+    "npm:webdsky@1.0.2": {
+      "source": "https://registry.npmjs.org/webdsky/-/webdsky-1.0.2.tgz#sha512-Q0nBAQPGnbtMlZOHNh5xbs5pBkLk8pWynpGHSLEHAGEM5acXg6WL0pOaj+2063S0kOzyD1u1SvaDS9Q5AwKh/A=="
     },
     "npm:wrappy@1.0.2": {
       "source": "https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"

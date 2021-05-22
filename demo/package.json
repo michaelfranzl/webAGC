@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "@wasmer/wasi": "~0.12.0",
-    "@wasmer/wasmfs": "~0.12.0"
+    "@wasmer/wasmfs": "~0.12.0",
+    "webdsky": "^1.0.2"
   },
   "devDependencies": {
     "@jspm/core": "^1.1.1"
