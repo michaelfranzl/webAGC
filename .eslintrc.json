@@ -1,0 +1,37 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb-base"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-cond-assign": ["error", "except-parens"],
+    "no-continue": "off",
+    "no-bitwise": "off",
+    "camelcase": ["error", { "ignoreDestructuring": true, "properties": "never" }],
+    "padded-blocks": "off",
+    "no-use-before-define": ["error", { "functions": false }],
+    "curly": ["error", "multi-or-nest"],
+    "no-restricted-syntax": "off",
+    "nonblock-statement-body-position": "off",
+    "no-plusplus": "off",
+    "no-multi-assign": "off",
+    "no-mixed-operators": "off",
+    "no-param-reassign": "off"
+  },
+  "plugins": [
+  ]
+}

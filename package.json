@@ -1,0 +1,17 @@
+{
+  "name": "webagc",
+  "version": "1.0.0",
+  "description": "A port of yaAGC, an emulator of the Apollo Guidance Computer, to the Web platform",
+  "main": "src/webAGC.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Karl Franzl",
+  "license": "GPL-2.0-or-later",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2"
+  }
+}
