@@ -4,7 +4,8 @@
   "description": "Demo for webAGC",
   "main": "index.js",
   "dependencies": {
-    "@wasmer/wasi": "~0.12.0"
+    "@wasmer/wasi": "~0.12.0",
+    "@wasmer/wasmfs": "~0.12.0"
   },
   "devDependencies": {
     "@jspm/core": "^1.1.1"
@@ -13,5 +14,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Michael Karl Franzl",
-  "license": "GPL-2.0-or-later"
+  "license": "GPL-2.0-or-later",
+  "type": "module"
 }
