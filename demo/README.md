@@ -52,3 +52,5 @@ In this directory
 2. run `jspm install`
 3. serve the parent directory via HTTP.
 4. access `demo/index.html` using a browser supporting [import maps](https://caniuse.com/?search=importmap) (e.g. based on Chromium 89 or newer). For example, visit: http://localhost:8000/demo/
+
+A copy of the resulting file and directory structure is located at https://michaelfranzl.github.io/webAGC/demo (and so it should be a fully functioning demo).
