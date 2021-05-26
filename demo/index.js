@@ -121,7 +121,7 @@ async function main() {
       agc.reset();
     });
 
-  document.getElementById('button_halt')
+  document.getElementById('button_pause')
     .addEventListener('click', () => agc.oscillate(Infinity));
 
   document.getElementById('button_run')
