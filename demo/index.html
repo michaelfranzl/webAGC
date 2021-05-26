@@ -31,13 +31,12 @@
   </head>
 
   <body>
-    <h1>webAGC Demo</h1>
+    <h1>webAGC Demo (beta)</h1>
 
     <p>Explainer and source code is available at <a href="https://github.com/michaelfranzl/webAGC" target="_blank">https://github.com/michaelfranzl/webAGC</a></p>
 
     <p>
-      <i>Requires a browser supporting <a href="https://caniuse.com/?search=importmap"
-          target="_blank">import maps</a> (e.g. based on Chromium 89 or newer).</i>
+      <i>For the time being, requires a browser supporting <a href="https://caniuse.com/?search=importmap" target="_blank">import maps</a> (e.g. based on Chromium 89 or newer).</i>
     </p>
 
     <div>
@@ -64,7 +63,7 @@
     </div>
 
     <div>
-      <label>Clock speed:</label>
+      <label>Instructions per second:</label>
       <span id="clock_speed"></span>
     </div>
 
@@ -77,12 +76,13 @@
     </div>
 
     <div>
-      <label>Load program:</label>
+      <label>Load program into fixed memory:</label>
       <select name="" id="programs">
         <option></option>
         <option value="Luminary099.bin">Luminary099.bin</option>
         <option value="Validation.bin">Validation.bin</option>
       </select>
+      <small>(explainer coming soon)</small>
     </div>
 
     <div id="dsky">
@@ -92,7 +92,7 @@
 
     <div id="erasable">
       <h2>Erasable memory</h2>
-      <p>8 banks of 256 16-bit words</p>
+      <p>Live view on 8 banks of 256 15-bit words in octal notation.</p>
     </div>
   </body>
 </html>
