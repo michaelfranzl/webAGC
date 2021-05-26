@@ -140,14 +140,66 @@ function createDsky() {
   document.getElementById('dsky').appendChild(dsky);
 
   const input = document.getElementById('dsky_key_input');
+  input.focus();
+
+  function handleKeyboardKey(key) {
+    // Prevent entering any non supported character.
+    if (!/^[vn+-cpker0-9\s]$/.test(key.toLowerCase())) return true;
+
+    // Let's do some key mapping because webDSKY only takes alphanumerical key strokes.
+    let dskyKey;
+    switch(key.toLowerCase()) {
+      case '+':
+        dskyKey = 'p';
+        break;
+      case '-':
+        dskyKey = 'm';
+        break;
+      case 'p':
+        dskyKey = 'o'; // o because p is taken by +
+        break;
+      default:
+        dskyKey = key.toLowerCase();
+    }
+    input.value = input.value + key;
+    if (dskyKey != ' ')
+      dsky.setAttribute('data-keypress', dskyKey);
+  }
+
   input.addEventListener('keydown', (event) => {
-    let key;
-    if (event.key === '+') key = 'p';
-    else if (event.key === '-') key = 'm';
-    else if (event.key === 'Enter') key = 'e';
-    else key = event.key.toLowerCase();
-    dsky.setAttribute('data-keypress', key);
+    if (event.ctrlKey) return; // event passthrough
+
+    if (event.key === 'Enter') {
+      // event translation
+      event.target.value = event.target.value + 'E ';
+      dsky.setAttribute('data-keypress', 'e');
+      return;
+    }
+
+    if (event.key.length > 1) return; // event passthrough
+
+    handleKeyboardKey(event.key); // handle 1 character key strokes
+    event.preventDefault();
   });
+
+  function typeStringIntoDsky(string, index = 0) {
+    if (index >= string.length) return;
+
+    const char = string[index];
+    handleKeyboardKey(char);
+
+    const rest = string.substring(1);
+    setTimeout(() => typeStringIntoDsky(rest), 500);
+    setTimeout(() => dsky.setAttribute('data-keypress', ''), 800);
+  }
+
+  input.addEventListener('paste', (event) => {
+    event.preventDefault();
+    for (const item of event.clipboardData.items)
+      if (item.type === 'text/plain') item.getAsString((string) => typeStringIntoDsky(string));
+  });
+
   input.addEventListener('keyup', () => dsky.setAttribute('data-keypress', ''));
+
   return dsky;
 }
