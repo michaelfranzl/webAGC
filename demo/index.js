@@ -71,7 +71,7 @@ async function main() {
           const wordEl = document.createElement('span');
           wordEl.classList.add('word');
           wordEl.wordValue = 0;
-          wordEl.innerHTML = '....';
+          wordEl.innerHTML = '.....';
           rowEl.appendChild(wordEl);
           wordEls.push(wordEl);
         }
@@ -87,7 +87,7 @@ async function main() {
       if (wordEl.wordValue === val) continue; // Skip unnecessary expensive DOM updates.
 
       wordEl.wordValue = val;
-      wordEl.innerHTML = `0000${val.toString(16)}`.slice(-4); // hexadecimal output of a 16 bit word
+      wordEl.innerHTML = `0000${val.toString(8)}`.slice(-5); // octal output of a 16 bit word
     }
     window.requestAnimationFrame(updateErasableMemory);
   }
