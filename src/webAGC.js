@@ -58,8 +58,15 @@ export default class WebAGC {
     this.writeIo(this.data.ports.normalKey & uBit, 0x11111);
   }
 
-  writeIo(port, data) {
-    this.instance.exports.packet_write(port, data);
+  /**
+   * Writes `data` to `channel`.
+   *
+   * Don't write to the same channel until the AGC has picked up the change, as would be the case
+   * too for electrical signals. This means allowing enough calls to `stepCpu()` in between writes
+   * to the same port, but the number depends entirely on the program running in the AGC.
+  */
+  writeIo(channel, data) {
+    this.instance.exports.packet_write(channel, data);
   }
 
   keyPress(keyCode) {
