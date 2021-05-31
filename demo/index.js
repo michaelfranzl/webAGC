@@ -128,7 +128,7 @@ async function main() {
     .addEventListener('click', () => agc.oscillate(getClockDivisor()));
 
   document.getElementById('button_step')
-    .addEventListener('click', () => agc.stepCpu(1)());
+    .addEventListener('click', () => agc.stepCpu(1));
 
   document.getElementById('clock_divisor').value = 1;
   document.getElementById('clock_divisor').dispatchEvent(new Event('change'));
