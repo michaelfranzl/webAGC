@@ -116,9 +116,10 @@ async function main() {
   const erasable = agc.getErasable();
   const wordEls = [];
 
-  // Start the virtual computer clock.
-  agc.oscillate();
   viewErasableMemory();
+
+  agc.oscillate(); // start the CPU clock
+  document.getElementById('agc_state').innerHTML = 'running';
 
   async function runProgram(binary) {
     agc.loadRom(binary);
@@ -198,10 +199,16 @@ async function main() {
     });
 
   document.getElementById('button_pause')
-    .addEventListener('click', () => agc.oscillate(Infinity));
+    .addEventListener('click', () => {
+      agc.oscillate(Infinity);
+      document.getElementById('agc_state').innerHTML = 'paused';
+    });
 
   document.getElementById('button_run')
-    .addEventListener('click', () => agc.oscillate(getClockDivisor()));
+    .addEventListener('click', () => {
+      agc.oscillate(getClockDivisor());
+      document.getElementById('agc_state').innerHTML = 'running';
+    });
 
   document.getElementById('button_step')
     .addEventListener('click', () => agc.stepCpu(1));
