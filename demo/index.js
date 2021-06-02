@@ -97,7 +97,20 @@ async function main() {
   dsky.addEventListener('keypress', ({ detail }) => agc.keyPress(detail));
   dsky.addEventListener('proceed', ({ detail }) => agc.proceedKeyPress(detail));
 
-  const agcReady = agc.ready().then(() => console.log(`AGC version ${agc.version()} is ready`));
+  const agcReady = agc.ready().then(() => {
+    let commitId;
+    let agcVersion;
+    if (typeof agc.version === 'function') {
+      agcVersion = (typeof agc.version === 'function') ? agc.version() : 'unknown';
+      commitId = agcVersion.match(/^.* ([0-9a-f]{9}$)/)[1];
+    } else {
+      agcVersion = 'unknown';
+      commitId = 'unknown';
+    }
+    const link = document.getElementById('yaAGC_version');
+    link.setAttribute('href', `https://github.com/michaelfranzl/virtualagc/tree/${commitId}`);
+    link.innerHTML = commitId;
+  });
   await Promise.all([agcReady]);
 
   const erasable = agc.getErasable();
