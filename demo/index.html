@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>webAGC</title>
-    <meta name="viewport" content="width=device-width">
+    <title>webAGC Demo</title>
+    <meta name="viewport" content="width=500">
     <link rel="stylesheet" href="screen.css">
 
     <script type="importmap">
@@ -31,12 +31,20 @@
   </head>
 
   <body>
-    <h1>webAGC Demo (beta)</h1>
-
-    <p>Explainer and source code is available at <a href="https://github.com/michaelfranzl/webAGC" target="_blank">https://github.com/michaelfranzl/webAGC</a></p>
+    <h1>webAGC Demo</h1>
 
     <p>
-      <i>For the time being, requires a browser supporting <a href="https://caniuse.com/?search=importmap" target="_blank">import maps</a> (e.g. based on Chromium 89 or newer).</i>
+      This demo is part of
+      <a href="https://github.com/michaelfranzl/webAGC" target="_blank">webAGC</a>,
+      a port of yaAGC (an emulator of the Apollo Guidance Computer from the
+      <a href="https://www.ibiblio.org/apollo/" target="_blank">Virtual AGC Project</a>)
+      to the web platform.
+    </p>
+
+    <p>
+      <i>To ease the deployment workflow of this demo, it currently requires a browser supporting
+        <a href="https://caniuse.com/?search=importmap" target="_blank">import maps</a>
+        (e.g. based on Chromium 89 or newer).</i>
     </p>
 
     <hr/>
@@ -72,7 +80,6 @@
       <label>Instructions per second:</label>
       <span id="clock_speed"></span>
     </div>
-
     <div>
       <label>CPU manipulation:</label>
       <button id="button_reset">Reset</button>
@@ -80,24 +87,62 @@
       <button id="button_step">Step</button>
       <button id="button_run">Run</button>
     </div>
-
     <div>
       <label>State:</label>
       <span id="agc_state"></span>
-      </br>
+    </div>
+
+    <hr/>
+
+    <h3>AGC software</h3>
+
+    <p>
+      For demonstration purposes, you can choose below from only two programs,
+      <code>Luminary099.bin</code> and <code>Validation.bin</code>.
+    </p>
+
+    <p>
+      <b>Validation.bin:</b> This is a "modern" AGC program originally written by Ronald Burkey to
+      test the AGC emulator. When the "OPR ERR" lamp is blinking, press the <kbd>PRO</kbd> key.
+      After 38 seconds, the number 77 should be displayed in the PROG field. This means that the
+      test suite was successful.
+    </p>
+
+    <p>
+      <b>Luminary099.bin:</b> This is the AGC program used in the Apollo 11 Lunar Module. Aside from
+      being able to land on the Moon, it also can do simple things which are useful for testing.
+      For example:
+      <ul>
+        <li>Type <kbd>VERB</kbd> <kbd>3</kbd> <kbd>5</kbd> <kbd>ENTR</kbd>: Lamp test.</li>
+        <li>Type <kbd>VERB</kbd> <kbd>1</kbd> <kbd>6</kbd> <kbd>NOUN</kbd> <kbd>6</kbd> <kbd>5</kbd>
+          <kbd>ENTR</kbd>: Show seconds, minutes and hours since the program has started
+          ('uptime').
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      For more information on these programs, please see
+      <a href="https://www.ibiblio.org/apollo/" target="_blank">the Virtual AGC website</a>.
+    </p>
+
+    <p>
       <label>Load program into fixed memory:</label>
       <select name="" id="programs">
         <option></option>
         <option value="Luminary099.bin">Luminary099.bin</option>
         <option value="Validation.bin">Validation.bin</option>
       </select>
-      <small>(explainer coming soon)</small>
-    </div>
+    </p>
 
+    <hr/>
+
+    <h3>DiSplay and KeYboard (DSKY) of the AGC</h3>
+    <p>Interact with the DSKY by clicking on its keys, or by typing letters into the input field.
+    (The input field may not work on Chromium for Android because of Chromium bug 118639.)</p>
     <div>
       <label>DSKY key input:</label>
       <input id="dsky_key_input"></input>
-      <small>(auto-types pasted text)</small>
       <br/>
       <small>
         <kbd>0</kbd>-<kbd>9</kbd>, <kbd>+</kbd>, <kbd>-</kbd>, VERB: <kbd>v</kbd>, NOUN: <kbd>n</kbd>,CLR: <kbd>c</kbd>, KEY REL: <kbd>k</kbd>, ENTR: <kbd>e</kbd> or <kbd>Enter</kbd>, RSET: <kbd>r</kbd>, PRO: <kbd>p</kbd>
@@ -106,9 +151,11 @@
 
     <div id="dsky"></div>
 
+    <hr/>
+
     <div id="erasable">
       <h2>Erasable memory</h2>
-      <p>Live view on 8 banks of 256 15-bit words in octal notation.</p>
+      <p>This is a live view on 8 banks of 256 15-bit words in octal notation.</p>
     </div>
   </body>
 </html>
