@@ -70,6 +70,8 @@ export default class WebAGC {
   }
 
   keyPress(keyCode) {
+    if (!keyCode) return; // Ignore key releases. Luminary099 is expecting this (KEY REL light).
+
     this.writeIo(this.data.ports.normalKey, keyCode);
   }
 
