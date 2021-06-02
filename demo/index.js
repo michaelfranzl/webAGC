@@ -108,8 +108,6 @@ async function main() {
   viewErasableMemory();
 
   async function runProgram(binary) {
-    const checksum = await crypto.subtle.digest('SHA-1', binary);
-    console.log('Loading ROM with SHA-1 checksum', buf2hex(checksum));
     agc.loadRom(binary);
     agc.reset();
   }
