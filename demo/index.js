@@ -118,8 +118,15 @@ async function main() {
 
   viewErasableMemory();
 
+  document.getElementById('programs').value = 'Luminary099.bin';
+  await loadProgram('agc/Luminary099.bin');
+
   agc.oscillate(); // start the CPU clock
   document.getElementById('agc_state').innerHTML = 'running';
+
+  // Show off the lamp test and uptime programs of Luminary099
+  setTimeout(() => typeStringIntoDsky('V35 E '), 2000);
+  setTimeout(() => typeStringIntoDsky('V16 N65 E '),  12000);
 
   async function runProgram(binary) {
     agc.loadRom(binary);
