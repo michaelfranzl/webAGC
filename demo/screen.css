@@ -1,13 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0-or-later */
 /* SPDX-FileCopyrightText: Copyright 2020 Michael Karl Franzl <public.michael@franzl.name> */
 
-#erasable {
-  font-family: 'monospace';
-  font-size: 8pt;
-  background-color: #EEEEEE;
-  padding: 5px;
-}
-
 #dsky {
   height: 580px;
   width: 500px;
@@ -22,20 +15,6 @@ label {
   display: inline-block;
   width: 200px;
   font-style: italic;
-}
-
-span.word {
-  display: inline-block;
-  width: 38px;
-}
-
-div.bank {
-  padding: 5px 5px 5px 0px;
-  display: inline-block;
-}
-
-div.bank p {
-  font-weight: bold;
 }
 
 kbd {

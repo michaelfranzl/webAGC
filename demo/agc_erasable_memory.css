@@ -1,0 +1,60 @@
+:host {
+  font-family: 'monospace';
+  font-size: 10px;
+  background-color: #EEEEEE;
+  padding: 5px;
+}
+
+p.register_label {
+  color: blue;
+}
+
+div#erasable div {
+  vertical-align: bottom;
+}
+
+div.word,
+div.col_header {
+  display: inline-block;
+  width: 48px;
+  text-align: right;
+  border: 1px solid transparent;
+  margin: -1px -1px 0px 0px;
+  padding: 1px;
+}
+
+div.word.special_register {
+  border-color: black;
+}
+
+div.word
+label {
+  text-transform: uppercase;
+  width: 100%;
+  display: inline-block;
+  background-color: #CCCCCC;
+  cursor: pointer;
+}
+
+div.col_header,
+div.erasable_row_label {
+  font-style: italic;
+  font-weight: bold;
+}
+
+div.erasable_row_label {
+  display: inline-block;
+  width: 30px;
+}
+
+div.bank {
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px;
+  display: inline-block;
+  background-color: #DDDDDD;
+}
+
+#address_000000 {
+  background-color: rgb(255, 0, 0);
+}

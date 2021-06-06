@@ -3,6 +3,7 @@
 
 import 'webdsky';
 import WebAGC from 'WebAGC';
+import AGCErasableMemory from './agc_erasable_memory.js';
 
 window.addEventListener('load', async () => {
   main();
@@ -67,10 +68,10 @@ async function main() {
   });
   await Promise.all([agcReady]);
 
-  const erasable = agc.getErasable();
-  const wordEls = [];
+  const erasableView = document.getElementsByTagName('agc-erasable-memory')[0];
+  erasableView.memory = agc.getErasable();
+  erasableView.render();
 
-  viewErasableMemory();
 
   document.getElementById('programs').value = 'Luminary099.bin';
   await loadProgram('agc/Luminary099.bin');
@@ -162,52 +163,6 @@ async function main() {
     const response = await fetch(url);
     const binary = await response.arrayBuffer();
     runProgram(binary);
-  }
-
-  function createChild(parent, tag, { classes = [], id, attributes = {} } = {}) {
-    const element = document.createElement(tag);
-    for (const clss of classes) element.classList.add(clss);
-    Object.assign(element, attributes);
-    if (id) element.id = id;
-    parent.appendChild(element);
-    return element;
-  }
-
-  function viewErasableMemory() {
-    const domEl = document.getElementById('erasable');
-    for (let bankIdx = 0; bankIdx < 8; bankIdx++) {
-      const bankEl = document.createElement('div');
-      bankEl.classList.add('bank');
-      const headingEl = document.createElement('p');
-      headingEl.innerHTML = `Bank ${parseInt(bankIdx, 8)}`;
-      bankEl.appendChild(headingEl);
-      domEl.appendChild(bankEl);
-      for (let rowIdx = 0; rowIdx < 32; rowIdx++) {
-        const rowEl = document.createElement('div');
-        bankEl.appendChild(rowEl);
-        for (let wordIdx = 0; wordIdx < 8; wordIdx++) {
-          const wordEl = document.createElement('span');
-          wordEl.classList.add('word');
-          wordEl.wordValue = 0;
-          wordEl.innerHTML = '.....';
-          rowEl.appendChild(wordEl);
-          wordEls.push(wordEl);
-        }
-      }
-    }
-    updateErasableMemory();
-  }
-
-  function updateErasableMemory() {
-    for (let idx = 0; idx < erasable.length; idx++) {
-      const wordEl = wordEls[idx];
-      const val = erasable[idx];
-      if (wordEl.wordValue === val) continue; // Skip unnecessary expensive DOM updates.
-
-      wordEl.wordValue = val;
-      wordEl.innerHTML = `0000${val.toString(8)}`.slice(-5); // octal output of a 16 bit word
-    }
-    window.requestAnimationFrame(updateErasableMemory);
   }
 
   function getClockDivisor() {
