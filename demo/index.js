@@ -93,8 +93,10 @@ async function main() {
     },
   });
 
-  // Wire the DSKY key presses to the AGC (the PRO key is wired separately).
+  // Wire regular DSKY key presses to the AGC
   dsky.addEventListener('keypress', ({ detail }) => agc.keyPress(detail));
+
+  // Wire DSKY PRO key presses to the AGC
   dsky.addEventListener('proceed', ({ detail }) => agc.proceedKeyPress(detail));
 
   const agcReady = agc.ready().then(() => {
@@ -137,6 +139,15 @@ async function main() {
     const response = await fetch(url);
     const binary = await response.arrayBuffer();
     runProgram(binary);
+  }
+
+  function createChild(parent, tag, { classes = [], id, attributes = {} } = {}) {
+    const element = document.createElement(tag);
+    for (const clss of classes) element.classList.add(clss);
+    Object.assign(element, attributes);
+    if (id) element.id = id;
+    parent.appendChild(element);
+    return element;
   }
 
   function viewErasableMemory() {
