@@ -11,7 +11,7 @@ function modulePath() {
 }
 
 export default class WebAGC {
-  constructor({ dskyOut }) {
+  constructor({ onChannelUpdate, onDSKYLightsUpdate }) {
     this.url = `${modulePath()}/yaAGC.wasm`;
 
     this.data = {
@@ -25,10 +25,12 @@ export default class WebAGC {
     };
 
     this.state = {
+      channels: {},
       lamps: 0,
     };
 
-    this.dskyOut = dskyOut;
+    this.onChannelUpdate = onChannelUpdate;
+    this.onDSKYLightsUpdate = onDSKYLightsUpdate;
 
     this.readyPromise = this.load()
       .then(() => this.configure());
@@ -119,19 +121,30 @@ export default class WebAGC {
   }
 
   readAllIo() {
-    let [channel, value] = this.readIo();
-    while (channel || value) {
-      if (channel === 0o10) { // DSKY digits
-        this.dskyOut({ input1: value });
+    let channel;
+    let value;
 
-      } else if (channel === 0o11) {
+    do {
+      [channel, value] = this.readIo();
+
+      const previousValue = this.state.channels[channel];
+      if (previousValue !== value) {
+        this.state.channels[channel] = value;
+        this.onChannelUpdate(channel, value);
+      }
+
+      if (channel === 0o11) {
         const bitmask = 0b110;
         // Bit 2: COMP ACTY
         // Bit 3: UPLINK ACTY
         this.state.lamps = (this.state.lamps & (~bitmask >>> 0)) | (value & bitmask);
-        this.dskyOut({ input2: this.state.lamps });
+        this.onDSKYLightsUpdate(this.state.lamps);
 
-      } else if (channel === 0o163) { // Fictitious port for blinking lights
+      } else if (channel === 0o163) {
+        // Fictitious port for blinking lights - apparently an emulation of hardware square-wave
+        // modulation of some signals, external to the AGC. yaAGC kindly supplies these signals to
+        // us already modulated.
+        // See https://www.ibiblio.org/apollo/developer.html
         const bitmask = 0b111111000;
         // Bit 1: AGC warning
         // Bit 4: TEMP lamp
@@ -143,10 +156,9 @@ export default class WebAGC {
         // Bit 10: EL off
         // console.log('blinking lamps', this.state.lamps);
         this.state.lamps = (this.state.lamps & (~bitmask >>> 0)) | (value & bitmask);
-        this.dskyOut({ input2: this.state.lamps });
+        this.onDSKYLightsUpdate(this.state.lamps);
       }
-      [channel, value] = this.readIo();
-    }
+    } while (channel || value);
   }
 
   oscillate(divisor) {

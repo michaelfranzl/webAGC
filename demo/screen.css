@@ -2,13 +2,13 @@
 /* SPDX-FileCopyrightText: Copyright 2020 Michael Karl Franzl <public.michael@franzl.name> */
 
 #dsky {
-  height: 570px;
-  width: 500px;
+  height: 460px;
+  width: 480px;
   margin: 10px 0px;
 }
 
 dsky-interface {
-  transform: scale(.7);
+  transform: scale(.6);
   transform-origin: top left;
 }
 
@@ -27,4 +27,11 @@ kbd {
   display: inline-block;
   padding: 2px 4px;
   white-space: nowrap;
+}
+
+@media only screen and (min-width: 700px) {
+
+  #dsky {
+    float: left;
+  }
 }

@@ -30,7 +30,8 @@
     "no-plusplus": "off",
     "no-multi-assign": "off",
     "no-mixed-operators": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "no-fallthrough": "off"
   },
   "plugins": [
   ]

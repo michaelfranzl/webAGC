@@ -8,7 +8,9 @@ This demo combines the following components:
   * CPU manipulation: reset, halt, run, step, clock divide
   * 'Hot-plugging' of the "fixed memory" (the 'ROM') of the AGC. In other words, plugging different
       programs into the computer while it is running.  (see below, "AGC programs")
-* A live view of the "erasable memory" (the 'RAM') of the AGC
+* Live views of the AGC state
+  * erasable memory with register labels and explanations
+  * interactive input ports and output ports
 
 ## AGC programs
 
@@ -32,6 +34,12 @@ Documentation of these AGC programs can be found at https://www.ibiblio.org/apol
     <td>Luminary099</td>
     <td><a href="agc/Luminary099.bin">agc/Luminary099.bin</a></td>
     <td><a href="https://github.com/virtualagc/virtualagc/tree/92a74ef1c88aede2e4ba0a86c6585c9ea911226d/Luminary099">Source</a></td>
+    <td>Built by running <code>make</code> in the root directory.</td>
+  </tr>
+  <tr>
+    <td>Comanche055</td>
+    <td><a href="agc/Comanche055.bin">agc/Comanche055.bin</a></td>
+    <td><a href="https://github.com/virtualagc/virtualagc/tree/92a74ef1c88aede2e4ba0a86c6585c9ea911226d/Comanche055">Source</a></td>
     <td>Built by running <code>make</code> in the root directory.</td>
   </tr>
   <tr>

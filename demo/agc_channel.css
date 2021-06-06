@@ -1,0 +1,42 @@
+:host {
+  width: 145px;
+  display: inline-block;
+  border: 1px solid black;
+  padding: 10px 1px;
+  margin: 10px 3px;
+  font-family: monospace;
+  font-size: 8px;
+}
+
+:host([data-direction="output"]) {
+  background-color: #ffeeee;
+}
+
+:host([data-direction="input"]) {
+  background-color: #eeeeff;
+}
+
+div.bit {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 1px solid black;
+  margin: 1px;
+  vertical-align: bottom;
+}
+
+:host([data-direction="input"])
+div.row {
+  cursor: pointer;
+  user-select: none;
+}
+
+:host([data-direction="input"])
+div.bit[data-value="true"] {
+  background-color: blue;
+}
+
+:host([data-direction="output"])
+div.bit[data-value="true"] {
+  background-color: red;
+}

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>webAGC Demo</title>
-    <meta name="viewport" content="width=500">
+    <meta name="viewport" content="width=480">
     <link rel="stylesheet" href="screen.css">
 
     <script type="importmap">
@@ -44,7 +44,8 @@
     <p>
       <i>To ease the deployment workflow of this demo, it currently requires a browser supporting
         <a href="https://caniuse.com/?search=importmap" target="_blank">import maps</a>
-        (e.g. based on Chromium 89 or newer).</i>
+        (e.g. based on Chromium 89 or newer). For best user experience, please use a desktop
+        browser.</i>
     </p>
 
     <hr/>
@@ -92,9 +93,11 @@
       <span id="agc_state"></span>
     </div>
 
-    <hr/>
 
     <h3>DiSplay and KeYboard (DSKY) of the AGC</h3>
+
+    <div id="dsky"></div>
+
     <p>Interact with the DSKY by clicking on its keys, or by typing letters into the input field.
     (The input field may not work on Chromium for Android because of Chromium bug 118639.)</p>
     <div>
@@ -106,17 +109,12 @@
       </small>
     </div>
 
-    <div id="dsky">
-      <dsky-interface></dsky-interface>
-    </div>
-
     <hr/>
 
     <h3>AGC software</h3>
 
     <p>
-      For demonstration purposes, you can choose below from only two programs,
-      <code>Luminary099.bin</code> and <code>Validation.bin</code>.
+      For demonstration purposes, you can choose below from three programs:
     </p>
 
     <p>
@@ -140,25 +138,42 @@
     </p>
 
     <p>
+      <b>Comanche055.bin:</b> This is the AGC program used in the Apollo 11 Command Module. It
+      implements the same lamp test and time display as Luminary099.
+    </p>
+
+    <p>
       For more information on these programs, please see
       <a href="https://www.ibiblio.org/apollo/" target="_blank">the Virtual AGC website</a>.
     </p>
 
     <p>
       <label>Load program into fixed memory:</label>
-      <select name="" id="programs">
+      <select name="" id="agc_program_selector">
         <option></option>
-        <option value="Luminary099.bin">Luminary099.bin</option>
         <option value="Validation.bin">Validation.bin</option>
+        <option value="Luminary099.bin">Luminary099.bin</option>
+        <option value="Comanche055.bin">Comanche055.bin</option>
       </select>
     </p>
 
     <hr/>
 
+    <h2>I/O Channels</h2>
+
+    <h3>Outputs</h3>
+
+    <div id="channels_output"></div>
+
+    <h3>Inputs</h3>
+    <p>Click to toggle, double-click to toggle and latch.</p>
+    <div id="channels_input"></div>
+
+    <hr/>
 
     <h2>Erasable memory</h2>
     <p>This is a live view on 8 banks of 256 15-bit words in octal notation. CPU registers are
     located in the erasable memory and are labeled.</p>
-    <agc-erasable-memory></agc-erasable-memory>
+    <div id='agc_erasable_memory'></div>
   </body>
 </html>
