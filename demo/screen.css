@@ -2,8 +2,9 @@
 /* SPDX-FileCopyrightText: Copyright 2020 Michael Karl Franzl <public.michael@franzl.name> */
 
 #dsky {
-  height: 580px;
+  height: 570px;
   width: 500px;
+  margin: 10px 0px;
 }
 
 dsky-interface {

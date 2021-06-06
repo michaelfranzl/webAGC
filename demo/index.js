@@ -10,7 +10,7 @@ window.addEventListener('load', async () => {
 });
 
 async function main() {
-  const dsky = document.createElement('dsky-interface');
+  const dsky = document.getElementsByTagName('dsky-interface')[0];
   const agc = new WebAGC({
     // Wire the AGC lamp and digit outputs to the DSKY.
     dskyOut: ({ input1, input2 }) => {

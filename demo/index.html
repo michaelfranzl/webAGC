@@ -94,6 +94,24 @@
 
     <hr/>
 
+    <h3>DiSplay and KeYboard (DSKY) of the AGC</h3>
+    <p>Interact with the DSKY by clicking on its keys, or by typing letters into the input field.
+    (The input field may not work on Chromium for Android because of Chromium bug 118639.)</p>
+    <div>
+      <label>DSKY key input:</label>
+      <input id="dsky_key_input"></input>
+      <br/>
+      <small>
+        <kbd>0</kbd>-<kbd>9</kbd>, <kbd>+</kbd>, <kbd>-</kbd>, VERB: <kbd>v</kbd>, NOUN: <kbd>n</kbd>,CLR: <kbd>c</kbd>, KEY REL: <kbd>k</kbd>, ENTR: <kbd>e</kbd> or <kbd>Enter</kbd>, RSET: <kbd>r</kbd>, PRO: <kbd>p</kbd>
+      </small>
+    </div>
+
+    <div id="dsky">
+      <dsky-interface></dsky-interface>
+    </div>
+
+    <hr/>
+
     <h3>AGC software</h3>
 
     <p>
@@ -137,21 +155,6 @@
 
     <hr/>
 
-    <h3>DiSplay and KeYboard (DSKY) of the AGC</h3>
-    <p>Interact with the DSKY by clicking on its keys, or by typing letters into the input field.
-    (The input field may not work on Chromium for Android because of Chromium bug 118639.)</p>
-    <div>
-      <label>DSKY key input:</label>
-      <input id="dsky_key_input"></input>
-      <br/>
-      <small>
-        <kbd>0</kbd>-<kbd>9</kbd>, <kbd>+</kbd>, <kbd>-</kbd>, VERB: <kbd>v</kbd>, NOUN: <kbd>n</kbd>,CLR: <kbd>c</kbd>, KEY REL: <kbd>k</kbd>, ENTR: <kbd>e</kbd> or <kbd>Enter</kbd>, RSET: <kbd>r</kbd>, PRO: <kbd>p</kbd>
-      </small>
-    </div>
-
-    <div id="dsky"></div>
-
-    <hr/>
 
     <h2>Erasable memory</h2>
     <p>This is a live view on 8 banks of 256 15-bit words in octal notation. CPU registers are
