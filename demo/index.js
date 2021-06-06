@@ -53,13 +53,11 @@ async function main() {
   dsky.addEventListener('proceed', ({ detail }) => agc.proceedKeyPress(detail));
 
   const agcReady = agc.ready().then(() => {
+    const agcVersion = agc.version();
     let commitId;
-    let agcVersion;
-    if (typeof agc.version === 'function') {
-      agcVersion = (typeof agc.version === 'function') ? agc.version() : 'unknown';
+    try {
       [, commitId] = agcVersion.match(/^.* ([0-9a-f]{9}$)/);
-    } else {
-      agcVersion = 'unknown';
+    } catch {
       commitId = 'unknown';
     }
     const link = document.getElementById('yaAGC_version');

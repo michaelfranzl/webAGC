@@ -49,7 +49,11 @@ export default class WebAGC {
   }
 
   version() {
-    return stringFromMemory(this.memArray, this.instance.exports.version());
+    const versionFunction = this.instance.exports.version;
+    if (typeof versionFunction !== 'function')
+      return 'unknown';
+
+    return stringFromMemory(this.memArray, versionFunction());
   }
 
   configure() {
