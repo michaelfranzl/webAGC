@@ -5,11 +5,10 @@ import 'webdsky';
 import WebAGC from 'WebAGC';
 
 function buf2hex(buffer) { // buffer is an ArrayBuffer
-  return [...new Uint8Array(buffer)].map(x => x.toString(16).padStart(2, '0')).join('');
+  return [...new Uint8Array(buffer)].map((x) => x.toString(16).padStart(2, '0')).join('');
 }
 
-window.addEventListener('load', async (_) => {
-  console.log('onload');
+window.addEventListener('load', async () => {
   main();
 });
 
@@ -43,8 +42,8 @@ async function main() {
       default:
         dskyKey = key.toLowerCase();
     }
-    input.value = input.value + key;
-    if (dskyKey != ' ')
+    input.value += key;
+    if (dskyKey !== ' ')
       dsky.setAttribute('data-keypress', dskyKey);
   }
 
@@ -53,7 +52,7 @@ async function main() {
 
     if (event.key === 'Enter') {
       // event translation
-      event.target.value = event.target.value + 'E ';
+      event.target.value = `${event.target.value}E `;
       dsky.setAttribute('data-keypress', 'e');
       return;
     }
@@ -61,7 +60,7 @@ async function main() {
     if (event.key.length > 1) return; // event passthrough
 
     handleKeyboardKey(event.key); // handle single character key strokes
-    event.preventDefault(); // because handleKeyboardKey will insert the character into the input tag
+    event.preventDefault(); // because handleKeyboardKey will insert the character
   });
 
   input.addEventListener('keyup', () => dsky.setAttribute('data-keypress', ''));
@@ -104,7 +103,7 @@ async function main() {
     let agcVersion;
     if (typeof agc.version === 'function') {
       agcVersion = (typeof agc.version === 'function') ? agc.version() : 'unknown';
-      commitId = agcVersion.match(/^.* ([0-9a-f]{9}$)/)[1];
+      [, commitId] = agcVersion.match(/^.* ([0-9a-f]{9}$)/);
     } else {
       agcVersion = 'unknown';
       commitId = 'unknown';
@@ -128,7 +127,7 @@ async function main() {
 
   // Show off the lamp test and uptime programs of Luminary099
   setTimeout(() => typeStringIntoDsky('V35 E '), 2000);
-  setTimeout(() => typeStringIntoDsky('V16 N65 E '),  12000);
+  setTimeout(() => typeStringIntoDsky('V16 N65 E '), 12000);
 
   async function runProgram(binary) {
     agc.loadRom(binary);
