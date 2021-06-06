@@ -4,49 +4,25 @@
 import 'webdsky';
 import WebAGC from 'WebAGC';
 
-function buf2hex(buffer) { // buffer is an ArrayBuffer
-  return [...new Uint8Array(buffer)].map((x) => x.toString(16).padStart(2, '0')).join('');
-}
-
 window.addEventListener('load', async () => {
   main();
 });
 
 async function main() {
-  // Create a DSKY instance.
   const dsky = document.createElement('dsky-interface');
-  document.getElementById('dsky').appendChild(dsky);
-
+  const agc = new WebAGC({
+    // Wire the AGC lamp and digit outputs to the DSKY.
+    dskyOut: ({ input1, input2 }) => {
+      if (input1 !== undefined)
+        dsky.setAttribute('data-input1', input1.toString(2).padStart(15, '0'));
+      if (input2 !== undefined)
+        dsky.setAttribute('data-input2', input2.toString(2).padStart(15, '0'));
+    },
+  });
+  const clockDivisorElement = document.getElementById('clock_divisor');
   const input = document.getElementById('dsky_key_input');
-  input.focus();
 
-  function handleKeyboardKey(key) {
-    if (!key)
-      dsky.setAttribute('data-keypress', ''); // keyup
-
-    // Prevent entering any non supported character.
-    if (!/^[vn+-cpker0-9\s]$/.test(key.toLowerCase())) return;
-
-    // Let's do some key mapping because webDSKY only takes alphanumerical key strokes.
-    let dskyKey;
-    switch (key.toLowerCase()) {
-      case '+':
-        dskyKey = 'p';
-        break;
-      case '-':
-        dskyKey = 'm';
-        break;
-      case 'p':
-        dskyKey = 'o'; // o because p is taken by +
-        break;
-      default:
-        dskyKey = key.toLowerCase();
-    }
-    input.value += key;
-    if (dskyKey !== ' ')
-      dsky.setAttribute('data-keypress', dskyKey);
-  }
-
+  input.addEventListener('keyup', () => dsky.setAttribute('data-keypress', ''));
   input.addEventListener('keydown', (event) => {
     if (event.ctrlKey) return; // event passthrough
 
@@ -62,36 +38,13 @@ async function main() {
     handleKeyboardKey(event.key); // handle single character key strokes
     event.preventDefault(); // because handleKeyboardKey will insert the character
   });
-
-  input.addEventListener('keyup', () => dsky.setAttribute('data-keypress', ''));
-
-  function typeStringIntoDsky(string, index = 0) {
-    if (index >= string.length) return;
-
-    const char = string[index];
-    handleKeyboardKey(char); // keydown now
-    setTimeout(() => handleKeyboardKey(''), 200); // keyup a bit later
-    const rest = string.substring(1);
-    setTimeout(() => typeStringIntoDsky(rest), 700); // next character
-  }
-
   input.addEventListener('paste', (event) => {
     event.preventDefault();
     for (const item of event.clipboardData.items)
       if (item.type === 'text/plain') item.getAsString((string) => typeStringIntoDsky(string));
   });
 
-  // Create a yaAGC instance.
-  const agc = new WebAGC({
-    // Wire the AGC lamp and digit outputs to the DSKY.
-    dskyOut: ({ input1, input2 }) => {
-      if (input1 !== undefined)
-        dsky.setAttribute('data-input1', input1.toString(2).padStart(15, '0'));
-      if (input2 !== undefined)
-        dsky.setAttribute('data-input2', input2.toString(2).padStart(15, '0'));
-    },
-  });
-
+  document.getElementById('dsky').appendChild(dsky);
   // Wire regular DSKY key presses to the AGC
   dsky.addEventListener('keypress', ({ detail }) => agc.keyPress(detail));
 
@@ -128,6 +81,77 @@ async function main() {
   // Show off the lamp test and uptime programs of Luminary099
   setTimeout(() => typeStringIntoDsky('V35 E '), 2000);
   setTimeout(() => typeStringIntoDsky('V16 N65 E '), 12000);
+
+  clockDivisorElement.addEventListener('change', (event) => {
+    const divisor = event.target.value === 'inf' ? Infinity : parseInt(event.target.value, 10);
+    agc.oscillate(divisor);
+    const cycleTimeUs = 11.72;
+    document.getElementById('clock_speed')
+      .innerHTML = `${(1 / cycleTimeUs * 1000000 / divisor).toFixed(1)} Hz`;
+  });
+
+  document.getElementById('programs').addEventListener('change', (event) => {
+    const programName = event.target.value;
+    loadProgram(`agc/${programName}`);
+  });
+
+  document.getElementById('button_reset').addEventListener('click', () => {
+    agc.reset();
+  });
+
+  document.getElementById('button_pause').addEventListener('click', () => {
+    agc.oscillate(Infinity);
+    document.getElementById('agc_state').innerHTML = 'paused';
+  });
+
+  document.getElementById('button_run').addEventListener('click', () => {
+    agc.oscillate(getClockDivisor());
+    document.getElementById('agc_state').innerHTML = 'running';
+  });
+
+  document.getElementById('button_step').addEventListener('click', () => agc.stepCpu(1));
+
+  document.getElementById('clock_divisor').value = 1;
+  document.getElementById('clock_divisor').dispatchEvent(new Event('change'));
+  input.focus();
+
+  // === FUNCTIONS ===
+  function handleKeyboardKey(key) {
+    if (!key)
+      dsky.setAttribute('data-keypress', ''); // keyup
+
+    // Prevent entering any non supported character.
+    if (!/^[vn+-cpker0-9\s]$/.test(key.toLowerCase())) return;
+
+    // Let's do some key mapping because webDSKY only takes alphanumerical key strokes.
+    let dskyKey;
+    switch (key.toLowerCase()) {
+      case '+':
+        dskyKey = 'p';
+        break;
+      case '-':
+        dskyKey = 'm';
+        break;
+      case 'p':
+        dskyKey = 'o'; // o because p is taken by +
+        break;
+      default:
+        dskyKey = key.toLowerCase();
+    }
+    input.value += key;
+    if (dskyKey !== ' ')
+      dsky.setAttribute('data-keypress', dskyKey);
+  }
+
+  function typeStringIntoDsky(string, index = 0) {
+    if (index >= string.length) return;
+
+    const char = string[index];
+    handleKeyboardKey(char); // keydown now
+    setTimeout(() => handleKeyboardKey(''), 200); // keyup a bit later
+    const rest = string.substring(1);
+    setTimeout(() => typeStringIntoDsky(rest), 700); // next character
+  }
 
   async function runProgram(binary) {
     agc.loadRom(binary);
@@ -186,8 +210,6 @@ async function main() {
     window.requestAnimationFrame(updateErasableMemory);
   }
 
-  const clockDivisorElement = document.getElementById('clock_divisor');
-
   function getClockDivisor() {
     switch (clockDivisorElement.value) {
       case 'inf':
@@ -196,40 +218,4 @@ async function main() {
         return parseInt(clockDivisorElement.value, 10);
     }
   }
-  clockDivisorElement.addEventListener('change', (event) => {
-    const divisor = event.target.value === 'inf' ? Infinity : parseInt(event.target.value, 10);
-    agc.oscillate(divisor);
-    const cycleTimeUs = 11.72;
-    document.getElementById('clock_speed')
-      .innerHTML = `${(1 / cycleTimeUs * 1000000 / divisor).toFixed(1)} Hz`;
-  });
-
-  document.getElementById('programs').addEventListener('change', (event) => {
-    const programName = event.target.value;
-    loadProgram(`agc/${programName}`);
-  });
-
-  document.getElementById('button_reset')
-    .addEventListener('click', () => {
-      // TODO: Clear DSKY digits and lights
-      agc.reset();
-    });
-
-  document.getElementById('button_pause')
-    .addEventListener('click', () => {
-      agc.oscillate(Infinity);
-      document.getElementById('agc_state').innerHTML = 'paused';
-    });
-
-  document.getElementById('button_run')
-    .addEventListener('click', () => {
-      agc.oscillate(getClockDivisor());
-      document.getElementById('agc_state').innerHTML = 'running';
-    });
-
-  document.getElementById('button_step')
-    .addEventListener('click', () => agc.stepCpu(1));
-
-  document.getElementById('clock_divisor').value = 1;
-  document.getElementById('clock_divisor').dispatchEvent(new Event('change'));
 }
