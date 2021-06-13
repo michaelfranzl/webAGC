@@ -145,17 +145,18 @@ export default class WebAGC {
         this.state.lamps = (this.state.lamps & (~bitmask >>> 0)) | (value & bitmask);
         this.dskyOut({ input2: this.state.lamps });
       }
-
       [channel, value] = this.readIo();
     }
   }
 
-  oscillate(clockDivisor = 1) {
+  oscillate(divisor) {
     const approxFramerate = 60;
-    const cycleMs = 0.01172; // 11.72 microseconds per cycle
+    const cycleMs = 0.01172; // 11.72 microseconds per AGC instruction
     let startTime = performance.now();
 
-    this.clockDivisor = clockDivisor;
+    if (divisor)
+      this.clockDivisor = divisor;
+
     this.totalSteps = 0;
     this.interval ||= setInterval(() => {
       const targetSteps = Math.floor((performance.now() - startTime) / cycleMs / this.clockDivisor);
