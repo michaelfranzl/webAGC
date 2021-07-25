@@ -2,7 +2,6 @@
 // SPDX-FileCopyrightText: Copyright 2020 Michael Karl Franzl <public.michael@franzl.name>
 
 import { WASI } from "@wasmer/wasi";
-import wasiBindings from "@wasmer/wasi/lib/bindings/browser.js";
 import { WasmFs } from "@wasmer/wasmfs";
 
 export default async function instantiateWasiModule(url, memory, imports = {}) {
@@ -13,7 +12,7 @@ export default async function instantiateWasiModule(url, memory, imports = {}) {
       '/': '/',
     },
     bindings: {
-      ...wasiBindings.default, // TS to JS compilation adds "default". wasmer/wasi issue?
+      ...WASI.defaultBindings,
       fs: wasmfs.fs,
     },
   });
