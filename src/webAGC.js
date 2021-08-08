@@ -4,15 +4,9 @@
 import { stringFromMemory } from './lib/wasm_c_utilities/strings.js';
 import loadWasiBinary from './lib/wasm_c_utilities/load.js';
 
-function modulePath() {
-  const parts = new URL(import.meta.url).pathname.split('/');
-  parts.pop();
-  return parts.join('/');
-}
-
 export default class WebAGC {
   constructor({ onChannelUpdate, onDSKYLightsUpdate }) {
-    this.url = `${modulePath()}/yaAGC.wasm`;
+    this.url = new URL('./yaAGC.wasm', import.meta.url);
 
     this.data = {
       ports: {
@@ -45,7 +39,8 @@ export default class WebAGC {
     this.memArray = new Uint8Array(this.mem.buffer);
 
     const imports = { env: { memory: this.mem } };
-    const { wasmfs, instance } = await loadWasiBinary(this.url, this.mem, imports);
+    const url = new URL('./yaAGC.wasm', import.meta.url);
+    const { wasmfs, instance } = await loadWasiBinary(url, this.mem, imports);
     this.instance = instance;
     this.wasmfs = wasmfs;
   }

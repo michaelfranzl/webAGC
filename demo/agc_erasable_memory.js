@@ -17,11 +17,11 @@ export default class AGCErasableMemory extends HTMLElement {
     super();
     this.rootEl = this.attachShadow({ mode: 'closed' });
 
-    const parts = new URL(import.meta.url).pathname.split('/');
-    parts.pop();
-    const path = parts.join('/');
     createChild(this.rootEl, 'link', {
-      attributes: { rel: 'stylesheet', href: `${path}/agc_erasable_memory.css` },
+      attributes: {
+        rel: 'stylesheet',
+        href: new URL('agc_erasable_memory.css', import.meta.url),
+      },
     });
 
     this.#valueEls = new Array(numWordsPerRow * numRows * numBanks);

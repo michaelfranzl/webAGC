@@ -13,11 +13,11 @@ export default class AGCChannel extends HTMLElement {
     super();
     this.rootEl = this.attachShadow({ mode: 'closed' });
 
-    const parts = new URL(import.meta.url).pathname.split('/');
-    parts.pop();
-    const path = parts.join('/');
     createChild(this.rootEl, 'link', {
-      attributes: { rel: 'stylesheet', href: `${path}/agc_channel.css` },
+      attributes: {
+        rel: 'stylesheet',
+        href: new URL('agc_channel.css', import.meta.url),
+      },
     });
   }
 
