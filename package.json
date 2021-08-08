@@ -1,6 +1,6 @@
 {
   "name": "webagc",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A port of yaAGC, an emulator of the Apollo Guidance Computer, to the Web platform",
   "main": "src/webAGC.js",
   "scripts": {
@@ -13,5 +13,9 @@
     "eslint": "^7.2.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2"
+  },
+  "dependencies": {
+    "@wasmer/wasi": "^0.12.0",
+    "@wasmer/wasmfs": "^0.12.0"
   }
 }

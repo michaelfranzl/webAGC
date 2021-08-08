@@ -6,27 +6,16 @@
     <meta name="viewport" content="width=480">
     <link rel="stylesheet" href="screen.css">
 
-    <script type="importmap">
-      {
-        "imports": {
-          "WebAGC": "../src/webAGC.js",
-          "@wasmer/wasi": "./jspm_packages/npm/@wasmer/wasi@0.12.0/lib/index.esm.js",
-          "@wasmer/wasi/": "./jspm_packages/npm/@wasmer/wasi@0.12.0/",
-          "@wasmer/wasmfs": "./jspm_packages/npm/@wasmer/wasmfs@0.12.0/lib/index.esm.js",
-          "buffer": "./jspm_packages/npm/@jspm/core@1.1.1/nodelibs/buffer.js",
-          "crypto": "./jspm_packages/npm/@jspm/core@1.1.1/nodelibs/crypto.js",
-          "fs": "./jspm_packages/npm/@jspm/core@1.1.1/nodelibs/@empty.js",
-          "path": "./jspm_packages/npm/@jspm/core@1.1.1/nodelibs/path.js",
-          "process": "./jspm_packages/npm/@jspm/core@1.1.1/nodelibs/process.js",
-          "tty": "./jspm_packages/npm/@jspm/core@1.1.1/nodelibs/tty.js",
-          "webdsky": "./jspm_packages/npm/webdsky@1.1.0/webDSKY.js",
-          "path-browserify/": "./jspm_packages/npm/path-browserify@1.0.1/",
-          "randomfill/index.dew.js": "./jspm_packages/npm/randomfill@1.0.4/browser.dew.js",
-          "safe-buffer/": "./jspm_packages/npm/safe-buffer@5.2.1/",
-          "randombytes/index.dew.js": "./jspm_packages/npm/randombytes@2.1.0/browser.dew.js"
-        }
-      }
-    </script>
+    <!-- <script type="importmap"> -->
+    <!--   { -->
+    <!--     "imports": { -->
+    <!--       "@wasmer/wasi": "./node_modules/@wasmer/wasi/lib/index.esm.js", -->
+    <!--       "@wasmer/wasmfs": "./node_modules/@wasmer/wasmfs/lib/index.esm.js", -->
+    <!--       "webdsky": "./node_modules/webdsky/webDSKY.js" -->
+    <!--     } -->
+    <!--   } -->
+    <!-- </script> -->
+
     <script type="module" src="index.js"></script>
   </head>
 
@@ -39,13 +28,6 @@
       a port of yaAGC (an emulator of the Apollo Guidance Computer from the
       <a href="https://www.ibiblio.org/apollo/" target="_blank">Virtual AGC Project</a>)
       to the web platform.
-    </p>
-
-    <p>
-      <i>To ease the deployment workflow of this demo, it currently requires a browser supporting
-        <a href="https://caniuse.com/?search=importmap" target="_blank">import maps</a>
-        (e.g. based on Chromium 89 or newer). For best user experience, please use a desktop
-        browser.</i>
     </p>
 
     <hr/>

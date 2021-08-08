@@ -1,20 +1,33 @@
 {
   "name": "webagc-demo",
-  "version": "1.0.0",
-  "description": "Demo for webAGC",
+  "version": "1.1.0",
+  "description": "Demo of webAGC",
   "main": "index.js",
   "dependencies": {
-    "@wasmer/wasi": "~0.12.0",
-    "@wasmer/wasmfs": "~0.12.0",
-    "webdsky": "^1.1.0"
-  },
-  "devDependencies": {
-    "@jspm/core": "^1.1.1"
+    "webagc": "file://..",
+    "webdsky": "~1.1.2"
   },
   "scripts": {
+    "serve-vanilla": "light-server --no-reload -p 8000 -s .",
+    "serve-dev": "web-dev-server --node-resolve --esbuild-target es2020",
+    "serve-build": "light-server --no-reload -p 8000 -s build",
+    "build": "rollup -c rollup.config.js",
+    "build-watch": "rollup -c rollup.config.js --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Michael Karl Franzl",
   "license": "GPL-2.0-or-later",
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@babel/preset-env": "^7.14.8",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-node-resolve": "^13.0.4",
+    "@web/dev-server": "^0.1.20",
+    "@web/dev-server-esbuild": "^0.2.12",
+    "@web/rollup-plugin-copy": "^0.3.0",
+    "@web/rollup-plugin-html": "^1.9.0",
+    "@web/rollup-plugin-import-meta-assets": "^1.0.7",
+    "light-server": "^2.9.1",
+    "rollup": "^2.54.0"
+  }
 }

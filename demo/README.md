@@ -54,11 +54,58 @@ Documentation of these AGC programs can be found at https://www.ibiblio.org/apol
 
 ## How to run
 
-In this directory
+This demo is a pure browser application without any knowledge of a web server. Of course, you
+still need a web server to transfer the files to the browser.
 
-1. run `npm i -g jspm@2.0.0-beta.7`
-2. run `jspm install`
-3. serve the parent directory via HTTP.
-4. access `demo/index.html` using a browser supporting [import maps](https://caniuse.com/?search=importmap) (e.g. based on Chromium 89 or newer). For example, visit: http://localhost:8000/demo/
+This application is written in modern Javascript (e.g. modules with bare imports and other new
+language features), so the untranspiled source code may not run in your browser. But there are two
+other ways of running the demo, explained below.
 
-A copy of the resulting file and directory structure is located at https://michaelfranzl.github.io/webAGC/demo (and so it should be a fully functioning demo).
+For both methods, first run in this directory for a clean install of all required libraries:
+
+```sh
+npm ci
+```
+
+### In development
+
+The development web server `@web/dev-server` resolves on the fly bare imports of modules in
+`node_modules`. It also sends requested Javascript files through `esbuild` to transpile modern
+features into something more compatible with older browsers.
+
+Run in this directory:
+
+```sh
+npm run serve-dev
+```
+
+Open the application at http://localhost:8000 in your browser.
+
+
+### In production
+
+This method is suitable for *any* static file web server because it only needs to serve a
+pre-collated set of pre-transpiled files.
+
+This is the preferred method for production.  A copy of the resulting file and directory structure
+is located at https://michaelfranzl.github.io/webAGC/demo which is a fully functional demonstration.
+
+Run in this directory:
+
+```sh
+npm run build # Builds everything into the `build` directory.
+```
+
+Then serve the build files using `light-server`:
+
+```sh
+npm run serve-build
+```
+
+To prove that the built files do not have any dependencies on the Nodejs ecosystem any more,
+you can serve the files using a Ruby web server for example:
+
+```sh
+gem install webrick
+ruby -r un -e httpd build -p 8000
+```

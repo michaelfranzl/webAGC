@@ -2,7 +2,8 @@
 // SPDX-FileCopyrightText: Copyright 2021 Michael Karl Franzl <public.michael@franzl.name>
 
 import 'webdsky';
-import WebAGC from 'WebAGC';
+
+import WebAGC from '../src/webAGC.js';
 import AGCErasableMemory from './agc_erasable_memory.js';
 import AGCChannel from './agc_channel.js';
 import DskyPcKeyboardInterface from './dsky_pc_keyboard_interface.js';
