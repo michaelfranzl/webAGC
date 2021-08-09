@@ -55,23 +55,25 @@ Documentation of these AGC programs can be found at https://www.ibiblio.org/apol
 ## How to run
 
 This demo is a pure browser application without any knowledge of a web server. Of course, you
-still need a web server to transfer the files to the browser.
+still need a web server to transfer the files to the browser; it's a web application after all.
 
 This application is written in modern Javascript (e.g. modules with bare imports and other new
-language features), so the untranspiled source code may not run in your browser. But there are two
-other ways of running the demo, explained below.
+language features), so the untranspiled source code may not (yet) be suitable for browsers.
+There are two ways of running the demo involving transpilation to the more compatible
+`es2020`/`ES11` profile (requires at least Firefox version 78 or Chrome version 89), listed and
+explained below.
 
-For both methods, first run in this directory for a clean install of all required libraries:
+Both methods require that you first install dependencies: Run the following command both in the
+parent directory *and* in this (demo) directory.
 
 ```sh
 npm ci
+cd demo
+npm ci
 ```
 
-### In development
 
-The development web server `@web/dev-server` resolves on the fly bare imports of modules in
-`node_modules`. It also sends requested Javascript files through `esbuild` to transpile modern
-features into something more compatible with older browsers.
+### Development
 
 Run in this directory:
 
@@ -81,14 +83,18 @@ npm run serve-dev
 
 Open the application at http://localhost:8000 in your browser.
 
+Behind the scenes, the development web server `@web/dev-server` resolves on the fly bare imports of
+modules in `node_modules`. It also sends requested Javascript files through `esbuild` to transpile
+modern features into a more widely supported `es2020`/`ES11` Javascript.
 
-### In production
+
+### Production
 
 This method is suitable for *any* static file web server because it only needs to serve a
 pre-collated set of pre-transpiled files.
 
 This is the preferred method for production.  A copy of the resulting file and directory structure
-is located at https://michaelfranzl.github.io/webAGC/demo which is a fully functional demonstration.
+is located and live at https://michaelfranzl.github.io/webAGC/demo
 
 Run in this directory:
 
@@ -96,7 +102,7 @@ Run in this directory:
 npm run build # Builds everything into the `build` directory.
 ```
 
-Then serve the build files using `light-server`:
+Then serve the built files using `light-server`:
 
 ```sh
 npm run serve-build
