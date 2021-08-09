@@ -44,8 +44,6 @@ export default class DskyPcKeyboardInterface {
         if (item.type === 'text/plain')
           item.getAsString((string) => this.type(string));
     });
-
-    this.inputElement.focus();
   }
 
   #handleKeyboardKey(key) {

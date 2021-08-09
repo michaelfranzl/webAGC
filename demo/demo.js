@@ -142,7 +142,6 @@ export default class Demo {
 
   #configureAGCProgramSelector() {
     document.getElementById('agc_program_selector').value = '';
-    document.getElementById('agc_program_selector').focus();
     document.getElementById('agc_program_selector').addEventListener('change', (event) => {
       const programName = event.target.value;
 
