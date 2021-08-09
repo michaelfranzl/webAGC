@@ -63,8 +63,8 @@ There are two ways of running the demo involving transpilation to the more compa
 `es2020`/`ES11` profile (requires at least Firefox version 78 or Chrome version 89), listed and
 explained below.
 
-Both methods require that you first install dependencies: Run the following command both in the
-parent directory *and* in this (demo) directory.
+Both methods require that you first install dependencies: Get a recent version of Node.js and run
+the following command both in the parent directory *and* in this (demo) directory.
 
 ```sh
 npm ci
