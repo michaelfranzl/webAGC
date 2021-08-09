@@ -1,6 +1,16 @@
 /* SPDX-License-Identifier: GPL-2.0-or-later */
 /* SPDX-FileCopyrightText: Copyright 2020 Michael Karl Franzl <public.michael@franzl.name> */
 
+@font-face {
+  font-family: 'Futura Renner';
+  src: url('./FuturaRenner-Regular.woff2');
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Futura Renner';
+  text-transform: uppercase;
+}
+
 #dsky {
   height: 460px;
   width: 480px;
@@ -30,7 +40,6 @@ kbd {
 }
 
 @media only screen and (min-width: 700px) {
-
   #dsky {
     float: left;
   }
