@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "webagc": "file://..",
-    "webdsky": "~1.1.2"
+    "webdsky": "~1.1.4"
   },
   "scripts": {
     "serve-vanilla": "light-server --no-reload -p 8000 -s .",
