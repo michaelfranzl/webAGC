@@ -4,7 +4,7 @@
   "description": "Demo of webAGC",
   "main": "index.js",
   "dependencies": {
-    "webagc": "file://..",
+    "webagc": "file:..",
     "webdsky": "~1.1.4"
   },
   "scripts": {
