@@ -64,7 +64,7 @@ There are two ways of running the demo involving transpilation to the more compa
 explained below.
 
 Both methods require that you first install dependencies: Get a recent version of Node.js and run
-the following command both in the parent directory *and* in this (demo) directory.
+`npm ci` (clean install) both in the parent directory *and* in this (demo) directory:
 
 ```sh
 npm ci
